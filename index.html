@@ -51,7 +51,7 @@
   --tinta-suave:   #5E594D;
   --tinta-tenue:   #948C7B;
   --papel:         #FCFAF4;   /* marfil claro: el dorado #B18C5B muy aclarado */
-  --papel-cabeza:  #F3EFE1;   /* el mismo dorado, un punto más cargado: es lo que hace
+  --papel-cabeza:  #EBE5D3;   /* el mismo dorado, dos puntos más cargado: es lo que hace
                                  que el encabezado se lea como banda propia y no como
                                  la misma hoja partida en dos por la barra verde. */
   --papel-hondo:   #FFFFFF;
@@ -84,7 +84,7 @@
     --tinta-suave:   #BAB2A2;
     --tinta-tenue:   #877F6E;
     --papel:         #16140F;
-    --papel-cabeza:  #211D15;
+    --papel-cabeza:  #272218;
     --papel-hondo:   #1E1B15;
     --oscuro:        #0A1F1B;
     --linea:         #2F2B22;
@@ -160,9 +160,12 @@ a:hover { color: var(--turquesa); }
 
 .lema em { color: var(--guinda); font-style: italic; font-weight: 900; }
 
+/* Va en el gris medio y no en el más claro: sobre la banda del
+   encabezado, que es más oscura que el cuerpo, el gris tenue se queda
+   en 2.6:1 — ilegible. Con este llega a 5.5:1. */
 .institucional {
   font-size: 0.8125rem;
-  color: var(--tinta-tenue);
+  color: var(--tinta-suave);
   margin: 0;
 }
 
