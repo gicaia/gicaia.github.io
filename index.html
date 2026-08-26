@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GICAIA — Grupo Interdisciplinario de Construcción de Aulas Invertidas con Agentes de IA</title>
+<meta name="description" content="Grupo de docentes del IEMS que construye sus propias aulas invertidas: sitios web e interactivos hechos con agentes de IA. Aquí viven las aulas de cada quien.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&display=swap" rel="stylesheet">
+
+<style>
+/* ---------------------------------------------------------------
+   GICAIA — hoja de estilo única. Sin dependencias, sin build.
+   Para editar el sitio solo se toca este archivo.
+
+   LA MARCA, y de dónde sale cada cosa:
+
+   Del IEMS / Gobierno de la CDMX — el ancla, dice de dónde somos:
+   · Guinda #9F2241 — su color principal.
+   · Verde #10312B — su verde institucional, que en su propio sitio
+     casi no usan. Aquí carga la navegación y el pie.
+   · Dorado #B18C5B — el tercer color de su portada. Aclarado casi
+     hasta el blanco da el papel #FCFAF4: tibio pero discreto, ni el
+     crema rosado de lety2E ni el blanco puro del IEMS.
+
+   De lety2E — los huesos, no los gestos: se hereda la estructura
+   para que se note el parentesco, no los detalles reconocibles:
+   · Playfair Display en itálica para los títulos, DM Sans para el
+     texto, y las esquinas redondeadas.
+   · El turquesa como único acento: lo que impide que esto se lea
+     como un formulario de gobierno.
+
+   El guinda del IEMS y el magenta de lety2E son el mismo tono en
+   distinta temperatura; por eso las dos marcas casan sin pelearse.
+   --------------------------------------------------------------- */
+
+:root {
+  /* --- color --- */
+  --guinda:        #9F2241;
+  --guinda-hondo:  #7A1A32;
+  --guinda-tenue:  #F6E5E8;
+  --turquesa:      #00706A;   /* para texto: contrasta sobre el papel */
+  --turquesa-vivo: #00C9B8;   /* solo decorativo */
+  --turquesa-tenue:#DCF2EE;
+  --verde-medio:   #235B4E;   /* el verde CDMX a media altura: para marcar «IEMS» en texto.
+                                 El #10312B es tan oscuro que en letra chica se lee negro. */
+
+  --tinta:         #322E27;
+  --tinta-suave:   #5E594D;
+  --tinta-tenue:   #948C7B;
+  --papel:         #FCFAF4;   /* marfil claro: el dorado #B18C5B muy aclarado */
+  --papel-hondo:   #FFFFFF;
+  --oscuro:        #10312B;   /* el verde institucional: navegación y pie */
+  --linea:         #EDE7DA;
+  --linea-fuerte:  #DED6C4;
+
+  /* --- forma --- */
+  --ancho:  64rem;
+  --r-sm:   6px;
+  --r-md:   12px;
+  --r-lg:   18px;
+
+  /* --- letra --- */
+  --display: "Playfair Display", Georgia, "Times New Roman", serif;
+  --texto:   "DM Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --guinda:        #E8879D;
+    --guinda-hondo:  #F2AEBD;
+    --guinda-tenue:  #38202A;
+    --turquesa:      #4FD3C4;
+    --turquesa-vivo: #00DEC8;
+    --turquesa-tenue:#123833;
+    --verde-medio:   #6DC9A4;
+
+    --tinta:         #EFEADF;
+    --tinta-suave:   #BAB2A2;
+    --tinta-tenue:   #877F6E;
+    --papel:         #16140F;
+    --papel-hondo:   #1E1B15;
+    --oscuro:        #0A1F1B;
+    --linea:         #2F2B22;
+    --linea-fuerte:  #443F33;
+  }
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--papel);
+  color: var(--tinta);
+  font-family: var(--texto);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+.envoltura { max-width: var(--ancho); margin: 0 auto; padding: 0 1.5rem; }
+
+a { color: var(--guinda); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:hover { color: var(--turquesa); }
+
+/* --- Filete institucional, arriba de todo --------------------- */
+
+.filete { height: 5px; background: var(--guinda); }
+
+/* --- Portada --------------------------------------------------- */
+
+/* Cabecera en dos columnas: la sigla de un lado, lo que hace el grupo
+   del otro. Va compacta a propósito — cada píxel que no gasta aquí se
+   lo gana el contenido de las pestañas. */
+
+.portada { padding: 1.6rem 0 1.15rem; }
+
+.portada .fila {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+  flex-wrap: wrap;
+}
+
+.portada .raya {
+  width: 2px;
+  align-self: stretch;
+  background: var(--linea-fuerte);
+}
+
+.sigla {
+  font-family: var(--display);
+  font-style: italic;
+  font-weight: 900;
+  font-size: clamp(2.4rem, 8vw, 3.5rem);
+  line-height: 1;
+  letter-spacing: -0.015em;
+  color: var(--guinda);
+  margin: 0;
+}
+
+.lema {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(1.05rem, 2.8vw, 1.45rem);
+  line-height: 1.3;
+  margin: 0 0 0.3rem;
+  max-width: 22rem;
+}
+
+.lema em { color: var(--guinda); font-style: italic; font-weight: 900; }
+
+.institucional {
+  font-size: 0.8125rem;
+  color: var(--tinta-tenue);
+  margin: 0;
+}
+
+/* «IEMS» en verde institucional: es lo único de esa línea que vale la
+   pena resaltar, y el verde lo separa sin necesidad de más puntuación. */
+.iems {
+  color: var(--verde-medio);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+/* En pantalla angosta las dos columnas se apilan y la raya estorba. */
+@media (max-width: 34rem) {
+  .portada .fila { gap: 0.65rem; }
+  .portada .raya { display: none; }
+  .lema { max-width: none; }
+}
+
+.promesa {
+  font-family: var(--display);
+  font-size: clamp(1.15rem, 2.6vw, 1.45rem);
+  line-height: 1.4;
+  margin: 0 0 1.35rem;
+  max-width: 36rem;
+}
+
+.promesa em { color: var(--turquesa); font-style: italic; font-weight: 700; }
+
+/* --- Navegación ------------------------------------------------ */
+
+.navegacion {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--oscuro);
+}
+
+.navegacion ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 0.9375rem;
+}
+
+.navegacion a {
+  display: block;
+  color: #B9CCC2;
+  text-decoration: none;
+  padding: 0.9rem 0 0.75rem;
+  border-bottom: 3px solid transparent;
+  transition: color .15s, border-color .15s;
+}
+
+.navegacion a:hover { color: #EAF3EE; }
+
+/* la pestaña abierta */
+.navegacion a[aria-selected="true"] {
+  color: #FFFFFF;
+  font-weight: 500;
+  border-bottom-color: var(--turquesa-vivo);
+}
+
+/* --- Secciones ------------------------------------------------- */
+
+/* Cada sección es una pestaña. Sin JavaScript se ven todas, una tras
+   otra, y el sitio sigue funcionando; con JavaScript se muestra solo
+   la abierta. */
+
+.panel { padding: 1.6rem 0 1.75rem; }
+
+.js .panel { display: none; }
+.js .panel.activo { display: block; }
+
+html:not(.js) .panel + .panel { border-top: 1px solid var(--linea); }
+
+h2 {
+  font-family: var(--display);
+  font-style: italic;
+  font-weight: 900;
+  font-size: clamp(1.8rem, 5vw, 2.4rem);
+  line-height: 1.15;
+  color: var(--guinda);
+  margin: 0 0 0.4rem;
+}
+
+.subtitulo { color: var(--tinta-tenue); font-size: 0.9375rem; margin: 0 0 1.4rem; }
+
+.prosa { max-width: 38rem; }
+.prosa p { margin: 0 0 1rem; }
+.prosa p:last-child { margin-bottom: 0; }
+
+.destacado {
+  border-left: 4px solid var(--turquesa-vivo);
+  padding: 0.25rem 0 0.25rem 1.35rem;
+  margin: 1.25rem 0;
+  font-family: var(--display);
+  font-size: 1.25rem;
+  line-height: 1.45;
+  max-width: 34rem;
+}
+
+/* --- Directorio de aulas --------------------------------------- */
+
+.aulas {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+  gap: 1.25rem;
+  margin: 0; padding: 0; list-style: none;
+}
+
+.aula {
+  border: 1px solid var(--linea-fuerte);
+  border-radius: var(--r-lg);
+  padding: 1.5rem 1.4rem 1.4rem;
+  background: var(--papel-hondo);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+/* El aula en obra se distingue por el borde punteado: sin adornos,
+   y el punteado ya significa "todavía no está". La tarjeta publicada
+   lleva borde continuo. */
+.aula:not(.aula--publicada) {
+  border-style: dashed;
+  background: transparent;
+}
+
+.aula h3 {
+  font-family: var(--display);
+  font-style: italic;
+  font-weight: 900;
+  font-size: 1.45rem;
+  color: var(--guinda);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.aula .materia { font-size: 0.875rem; color: var(--tinta-tenue); margin: 0; }
+.aula .descripcion { font-size: 0.9375rem; color: var(--tinta-suave); margin: 0.35rem 0 0; }
+.aula .enlace { margin-top: auto; padding-top: 1rem; font-size: 0.9375rem; font-weight: 500; }
+
+.etiqueta {
+  display: inline-block;
+  align-self: flex-start;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  margin-bottom: 0.15rem;
+}
+
+.etiqueta--publicada   { background: var(--turquesa-tenue); color: var(--turquesa); }
+.etiqueta--construccion{ background: var(--guinda-tenue);   color: var(--guinda); }
+
+/* --- Recursos -------------------------------------------------- */
+
+.recursos { list-style: none; margin: 0; padding: 0; }
+
+.recursos li {
+  border-top: 1px solid var(--linea);
+  padding: 1.25rem 0;
+  display: flex; flex-wrap: wrap;
+  gap: 0.25rem 1rem; align-items: baseline;
+}
+
+.recursos li:last-child { border-bottom: 1px solid var(--linea); }
+
+.recursos .titulo {
+  font-family: var(--display);
+  font-style: italic;
+  font-weight: 900;
+  font-size: 1.2rem;
+}
+
+.recursos .de   { font-size: 0.875rem; color: var(--tinta-tenue); }
+.recursos .nota { flex-basis: 100%; font-size: 0.9375rem; color: var(--tinta-suave); margin: 0.35rem 0 0; }
+
+/* --- El ciclo, en esquema --------------------------------------- */
+
+/* En pantalla angosta el esquema no se encoge hasta volverse ilegible:
+   se desplaza de lado dentro de su propia caja. */
+.esquema {
+  margin: 1.5rem 0 1.6rem;
+  padding: 0;
+  overflow-x: auto;
+}
+
+.esquema svg {
+  display: block;
+  width: 100%;
+  min-width: 34rem;
+  height: auto;
+  font-family: var(--texto);
+}
+
+.esquema .paso rect {
+  fill: var(--papel-hondo);
+  stroke: var(--linea-fuerte);
+  stroke-width: 1;
+}
+
+.esquema .paso circle { fill: var(--guinda); }
+
+/* Aquí sí van en DM Sans y no en Playfair: los números itálicos de
+   Playfair son de altura variable y en un círculo chico el 4 se
+   confunde con el 1. En un esquema la cifra tiene que leerse sola. */
+.esquema .num {
+  fill: var(--papel);
+  font-family: var(--texto);
+  font-weight: 700;
+  font-size: 15px;
+  text-anchor: middle;
+}
+
+.esquema .rot {
+  fill: var(--tinta);
+  font-size: 16px;
+  text-anchor: middle;
+}
+
+.esquema .avance path {
+  fill: none;
+  stroke: var(--tinta-tenue);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.esquema .vuelta {
+  fill: none;
+  stroke: var(--turquesa);
+  stroke-width: 2;
+}
+
+.esquema .vuelta-rot {
+  fill: var(--turquesa);
+  font-size: 15px;
+  font-weight: 500;
+  text-anchor: middle;
+}
+
+/* --- La aclaración, al pie de «Cómo trabajamos» ----------------- */
+
+.aclaracion {
+  margin-top: 1.75rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--linea);
+  max-width: 38rem;
+}
+
+.aclaracion p { margin: 0; }
+.aclaracion .destacado { margin: 0 0 0.9rem; font-size: 1.15rem; }
+
+/* --- Pie ------------------------------------------------------- */
+
+footer {
+  background: var(--oscuro);
+  color: #AFC2B7;
+  padding: 1rem 0;
+  font-size: 0.8125rem;
+}
+
+footer p { margin: 0; }
+footer strong { color: #E4EEE8; }
+
+/* Sobre el pie verde el verde no se ve; ahí «IEMS» se marca en claro
+   para que conserve el mismo rango que arriba. */
+footer .iems { color: #8FD8BC; }
+
+/* --- Marca de edición (se borra al llenar los datos) ------------ */
+
+.porllenar {
+  background: repeating-linear-gradient(45deg, #FFE9A8, #FFE9A8 6px, #FFF2CC 6px, #FFF2CC 12px);
+  color: #7A5A00;
+  border-radius: var(--r-sm);
+  padding: 0 0.35em;
+  font-style: normal;
+  font-size: 0.9em;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="filete"></div>
+
+<header class="portada">
+  <div class="envoltura">
+    <div class="fila">
+      <h1 class="sigla">GICAIA</h1>
+      <div class="raya" aria-hidden="true"></div>
+      <div>
+        <p class="lema">Construcción de <em>aulas invertidas</em> con agentes de IA</p>
+        <p class="institucional">Grupo Interdisciplinario · <span class="iems">IEMS</span> Ciudad de México</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Las pestañas. Cada enlace abre el panel del mismo nombre y deja
+     la dirección en la barra (…/#aulas), así que se pueden compartir. -->
+<nav class="navegacion">
+  <div class="envoltura">
+    <ul role="tablist">
+      <li><a role="tab" href="#que-es"          aria-controls="que-es">Qué es</a></li>
+      <li><a role="tab" href="#aulas"           aria-controls="aulas">Las aulas</a></li>
+      <li><a role="tab" href="#como-trabajamos" aria-controls="como-trabajamos">Cómo trabajamos</a></li>
+      <li><a role="tab" href="#recursos"        aria-controls="recursos">Recursos</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+
+<!-- =============================================================
+     1. QUÉ ES — la idea
+     Aquí va el criterio pedagógico y nada más. El funcionamiento
+     del grupo está en "Cómo trabajamos" y la aclaración sobre la
+     IA en "La IA, de frente": tres preguntas distintas, tres
+     pestañas, para que no se pisen.
+     ============================================================= -->
+<section id="que-es" class="panel" role="tabpanel" tabindex="-1">
+  <div class="envoltura">
+    <p class="promesa">
+      Cada quien construye <em>su aula propia</em>: un sitio con sus explicaciones,
+      sus ejercicios y sus interactivos, hecho por quien da la clase.
+    </p>
+
+    <h2>Qué es GICAIA</h2>
+    <p class="subtitulo">La idea. Un grupo de trabajo, no un curso.</p>
+
+    <div class="prosa">
+      <p>
+        Somos docentes de distintas asignaturas del IEMS que estamos construyendo, cada quien,
+        el sitio web de su materia: páginas con explicaciones, actividades e interactivos que
+        los estudiantes usan por su cuenta, antes y después de la clase.
+      </p>
+
+      <p class="destacado">
+        No se trata de mudar la clase de lugar. Se trata de quitar al profesor del pizarrón
+        y poner al frente al estudiante investigando y explorando.
+      </p>
+
+      <p>
+        Eso es lo que aquí quiere decir <strong>aula invertida</strong>, y conviene decirlo
+        claro porque la palabra se ha vuelto sinónimo de grabar videos. Los videos caben —
+        varias los usamos—, pero no son el criterio. El criterio es quién hace el trabajo
+        mental. Una página que repite la misma clase, solo que escrita, no invierte nada.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================================
+     2. LAS AULAS — el corazón del sitio.
+     Aquí viven juntas las personas y sus aulas: eran dos pestañas
+     ("Quiénes" y "Las aulas") que decían lo mismo a medias.
+
+     Para agregar a alguien: copiar un <li> y cambiar los datos.
+     Cuando publique, cambiar class="aula" por
+     class="aula aula--publicada", la etiqueta por la de publicada,
+     y agregar el <p class="enlace">.
+     ============================================================= -->
+<section id="aulas" class="panel" role="tabpanel" tabindex="-1">
+  <div class="envoltura">
+    <h2>Las aulas</h2>
+    <p class="subtitulo">
+      Quiénes somos y qué ha construido cada quien. Somos de asignaturas distintas y el grupo
+      se mantiene pequeño a propósito: seis personas como máximo.
+    </p>
+
+    <ul class="aulas">
+
+      <li class="aula aula--publicada">
+        <span class="etiqueta etiqueta--publicada">Publicada</span>
+        <h3>Lety</h3>
+        <p class="materia">Matemáticas · coordina el grupo</p>
+        <p class="descripcion">
+          Materiales, apuntes e interactivos de matemáticas para bachillerato.
+        </p>
+        <p class="enlace"><a href="https://lety2e.com/math">lety2e.com/math →</a></p>
+      </li>
+
+      <li class="aula">
+        <span class="etiqueta etiqueta--construccion">En construcción</span>
+        <h3>Antonia</h3>
+        <p class="materia"><span class="porllenar">asignatura</span></p>
+        <p class="descripcion">Su aula está en obra. Se enlaza aquí en cuanto publique.</p>
+      </li>
+
+      <li class="aula">
+        <span class="etiqueta etiqueta--construccion">En construcción</span>
+        <h3>Carmen</h3>
+        <p class="materia"><span class="porllenar">asignatura</span></p>
+        <p class="descripcion">Su aula está en obra. Se enlaza aquí en cuanto publique.</p>
+      </li>
+
+    </ul>
+
+    <div class="prosa" style="margin-top:1.6rem">
+      <p>
+        <strong>Si te interesa entrar:</strong> el grupo es pequeño y se abre por invitación,
+        pero si eres docente del IEMS y quieres construir tu aula, escribe a
+        <a href="mailto:leticia.rodriguez.sm@iems.edu.mx">leticia.rodriguez.sm@iems.edu.mx</a>.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================================
+     3. CÓMO TRABAJAMOS — el funcionamiento, y la puerta de entrada.
+     ============================================================= -->
+<section id="como-trabajamos" class="panel" role="tabpanel" tabindex="-1">
+  <div class="envoltura">
+    <h2>Cómo trabajamos</h2>
+    <p class="subtitulo">El funcionamiento. Una sesión al mes; la producción ocurre entre sesión y sesión.</p>
+
+    <div class="prosa">
+      <p>
+        La sesión mensual no es una clase: es donde cada quien <strong>muestra</strong> lo que
+        construyó. Lo que se aprende, se aprende haciendo, en casa, con el agente enfrente.
+        Entre sesiones hay un canal permanente para no quedarse atorado tres semanas.
+      </p>
+    </div>
+
+    <!-- El ciclo, en esquema. Para cambiar un paso se edita su <tspan>;
+         las cajas son cinco y están espaciadas cada 182 unidades. -->
+    <figure class="esquema">
+      <svg viewBox="0 0 900 205" role="img"
+           aria-label="El ciclo de trabajo, en cinco pasos que se repiten: un tema que se atora, un interactivo que lo desatore, publicado en tu sitio, usado en clase, contado en la sesión.">
+
+        <defs>
+          <marker id="punta" viewBox="0 0 10 10" refX="9" refY="5"
+                  markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 0 L 10 5 L 0 10 z" fill="var(--turquesa)"/>
+          </marker>
+        </defs>
+
+        <g class="paso">
+          <rect x="8"   y="34" width="152" height="78" rx="14"/>
+          <circle cx="84"  cy="34" r="15"/>
+          <text class="num" x="84"  y="39">1</text>
+          <text class="rot" x="84"  y="72">Un tema</text>
+          <text class="rot" x="84"  y="94">que se atora</text>
+        </g>
+
+        <g class="paso">
+          <rect x="190" y="34" width="152" height="78" rx="14"/>
+          <circle cx="266" cy="34" r="15"/>
+          <text class="num" x="266" y="39">2</text>
+          <text class="rot" x="266" y="72">Un interactivo</text>
+          <text class="rot" x="266" y="94">que lo desatore</text>
+        </g>
+
+        <g class="paso">
+          <rect x="372" y="34" width="152" height="78" rx="14"/>
+          <circle cx="448" cy="34" r="15"/>
+          <text class="num" x="448" y="39">3</text>
+          <text class="rot" x="448" y="72">Publicado</text>
+          <text class="rot" x="448" y="94">en tu sitio</text>
+        </g>
+
+        <g class="paso">
+          <rect x="554" y="34" width="152" height="78" rx="14"/>
+          <circle cx="630" cy="34" r="15"/>
+          <text class="num" x="630" y="39">4</text>
+          <text class="rot" x="630" y="72">Usado</text>
+          <text class="rot" x="630" y="94">en clase</text>
+        </g>
+
+        <g class="paso">
+          <rect x="736" y="34" width="152" height="78" rx="14"/>
+          <circle cx="812" cy="34" r="15"/>
+          <text class="num" x="812" y="39">5</text>
+          <text class="rot" x="812" y="72">Contado</text>
+          <text class="rot" x="812" y="94">en la sesión</text>
+        </g>
+
+        <!-- los avances de un paso al siguiente -->
+        <g class="avance">
+          <path d="M 170 66 L 180 73 L 170 80"/>
+          <path d="M 352 66 L 362 73 L 352 80"/>
+          <path d="M 534 66 L 544 73 L 534 80"/>
+          <path d="M 716 66 L 726 73 L 716 80"/>
+        </g>
+
+        <!-- la vuelta: lo que lo convierte en ciclo y no en lista -->
+        <path class="vuelta" d="M 812 112 L 812 152 Q 812 164 800 164 L 96 164 Q 84 164 84 152 L 84 122"
+              marker-end="url(#punta)"/>
+        <text class="vuelta-rot" x="448" y="192">y vuelta a empezar, cada mes</text>
+      </svg>
+    </figure>
+
+    <div class="prosa">
+      <p>
+        La meta de este semestre es tener <strong>una unidad completa</strong> de tu curso
+        funcionando así. Lo que venga después se decide cuando lleguemos.
+      </p>
+
+      <p>
+        Llegar a una sesión sin pieza es normal y no pasa nada: hay meses en que la escuela no
+        deja. Lo que sí importa es decirlo, en vez de dejar de venir.
+      </p>
+    </div>
+
+    <!-- La aclaración. Va al final y en voz baja a propósito: contesta
+         una duda, no encabeza el discurso. -->
+    <aside class="aclaracion">
+      <p class="destacado">
+        El estudiante no interactúa con ninguna IA. Lo que recibe es una página web con
+        explicaciones, ejercicios e interactivos.
+      </p>
+
+      <p>
+        Los agentes son herramienta de producción del docente. El contenido, la secuencia
+        didáctica y las decisiones pedagógicas son de autoría de quien firma cada aula.
+      </p>
+    </aside>
+  </div>
+</section>
+
+<!-- =============================================================
+     5. RECURSOS — se enlazan, vengan de donde vengan.
+     Este sitio reúne y enlaza; no es donde se produce el material.
+     ============================================================= -->
+<section id="recursos" class="panel" role="tabpanel" tabindex="-1">
+  <div class="envoltura">
+    <h2>Recursos</h2>
+    <p class="subtitulo">
+      Guías, plantillas y flujos de trabajo. Los reunimos aquí; viven donde los hizo quien los hizo.
+    </p>
+
+    <ul class="recursos">
+      <li>
+        <span class="titulo"><a href="https://lety2e.com/docencia">Aula propia — la guía para arrancar</a></span>
+        <span class="de">de Lety · lety2e.com/docencia</span>
+        <p class="nota">
+          Cómo montar tu aula desde cero: la carpeta, el agente, la publicación. Es el camino
+          completo, contado por alguien que ya lo recorrió.
+          <span class="porllenar">En escritura — revisar el enlace antes de publicar.</span>
+        </p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+</main>
+
+
+<footer>
+  <div class="envoltura">
+    <p>
+      <strong>GICAIA</strong> · <span class="iems">IEMS</span> Ciudad de México ·
+      Cada aula es de quien la hace; este sitio solo las reúne y las enlaza.
+    </p>
+  </div>
+</footer>
+
+<script>
+/* -----------------------------------------------------------------
+   LAS PESTAÑAS
+
+   Cómo funciona, por si hay que tocarlo:
+   · Cada enlace del menú apunta al id de su panel (#aulas → id="aulas").
+     Para agregar una pestaña basta con agregar el <li> y la <section>;
+     este código no se toca.
+   · La pestaña abierta queda en la dirección (…/#aulas), así que se
+     puede compartir el enlace de una pestaña concreta.
+   · Sin JavaScript se ven todos los paneles en fila y el sitio sigue
+     sirviendo: por eso la clase "js" se pone desde aquí y no en el HTML.
+   ----------------------------------------------------------------- */
+(function () {
+  document.documentElement.classList.add('js');
+
+  var pestanas = Array.prototype.slice.call(
+    document.querySelectorAll('.navegacion a[role="tab"]')
+  );
+  var paneles = Array.prototype.slice.call(document.querySelectorAll('.panel'));
+  if (!pestanas.length || !paneles.length) return;
+
+  function abrir(id, moverFoco) {
+    var hayPanel = paneles.some(function (p) { return p.id === id; });
+    if (!hayPanel) id = paneles[0].id;
+
+    paneles.forEach(function (p) { p.classList.toggle('activo', p.id === id); });
+
+    pestanas.forEach(function (t) {
+      var suya = t.getAttribute('aria-controls') === id;
+      t.setAttribute('aria-selected', suya ? 'true' : 'false');
+      t.setAttribute('tabindex', suya ? '0' : '-1');
+    });
+
+    // Al cambiar de pestaña se vuelve arriba: es justo lo que se
+    // esperaba al quitar el scroll de la página.
+    window.scrollTo(0, 0);
+
+    if (moverFoco) {
+      var panel = document.getElementById(id);
+      if (panel) panel.focus({ preventScroll: true });
+    }
+    return id;
+  }
+
+  function idDeLaDireccion() {
+    return (location.hash || '').replace(/^#/, '');
+  }
+
+  pestanas.forEach(function (t, i) {
+    t.addEventListener('click', function (e) {
+      e.preventDefault();
+      var id = t.getAttribute('aria-controls');
+      history.pushState(null, '', '#' + id);
+      abrir(id, true);
+    });
+
+    // Flechas izquierda/derecha para moverse entre pestañas con el teclado.
+    t.addEventListener('keydown', function (e) {
+      var salto = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+      if (!salto) return;
+      e.preventDefault();
+      var destino = pestanas[(i + salto + pestanas.length) % pestanas.length];
+      destino.focus();
+      destino.click();
+    });
+  });
+
+  window.addEventListener('popstate', function () { abrir(idDeLaDireccion(), false); });
+  window.addEventListener('hashchange', function () { abrir(idDeLaDireccion(), false); });
+
+  abrir(idDeLaDireccion(), false);
+
+  // Al entrar con una dirección de pestaña (…/#recursos) el navegador
+  // brinca al ancla por su cuenta y corta el encabezado. Se deshace en
+  // cuanto termina de pintar.
+  requestAnimationFrame(function () { window.scrollTo(0, 0); });
+  window.addEventListener('load', function () { window.scrollTo(0, 0); });
+})();
+</script>
+
+</body>
+</html>

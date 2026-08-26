@@ -11,3 +11,6 @@ GICAIA (documento de trabajo).md
 
 # Mac
 .DS_Store
+
+# Config local del preview
+.claude/
