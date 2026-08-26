@@ -51,6 +51,9 @@
   --tinta-suave:   #5E594D;
   --tinta-tenue:   #948C7B;
   --papel:         #FCFAF4;   /* marfil claro: el dorado #B18C5B muy aclarado */
+  --papel-cabeza:  #F3EFE1;   /* el mismo dorado, un punto más cargado: es lo que hace
+                                 que el encabezado se lea como banda propia y no como
+                                 la misma hoja partida en dos por la barra verde. */
   --papel-hondo:   #FFFFFF;
   --oscuro:        #10312B;   /* el verde institucional: navegación y pie */
   --linea:         #EDE7DA;
@@ -81,6 +84,7 @@
     --tinta-suave:   #BAB2A2;
     --tinta-tenue:   #877F6E;
     --papel:         #16140F;
+    --papel-cabeza:  #211D15;
     --papel-hondo:   #1E1B15;
     --oscuro:        #0A1F1B;
     --linea:         #2F2B22;
@@ -116,7 +120,10 @@ a:hover { color: var(--turquesa); }
    del otro. Va compacta a propósito — cada píxel que no gasta aquí se
    lo gana el contenido de las pestañas. */
 
-.portada { padding: 1.6rem 0 1.15rem; }
+.portada {
+  padding: 1.6rem 0 1.15rem;
+  background: var(--papel-cabeza);
+}
 
 .portada .fila {
   display: flex;
@@ -219,6 +226,14 @@ a:hover { color: var(--turquesa); }
   color: #FFFFFF;
   font-weight: 500;
   border-bottom-color: var(--turquesa-vivo);
+}
+
+/* En teléfono los cuatro nombres no caben en un renglón y el menú se
+   parte en dos. Que se parta está bien; lo que no, es que cada renglón
+   siga tan alto como cuando iba solo. */
+@media (max-width: 34rem) {
+  .navegacion ul { gap: 0 1.1rem; font-size: 0.875rem; }
+  .navegacion a  { padding: 0.55rem 0 0.45rem; }
 }
 
 /* --- Secciones ------------------------------------------------- */
