@@ -8,56 +8,69 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,700;12..96,800&display=swap" rel="stylesheet">
 
 <style>
 /* ---------------------------------------------------------------
    GICAIA — hoja de estilo única. Sin dependencias, sin build.
    Para editar el sitio solo se toca este archivo.
 
-   LA MARCA, y de dónde sale cada cosa:
+   LA MARCA, y por qué dejó de ser la del gobierno:
 
-   Del IEMS / Gobierno de la CDMX — el ancla, dice de dónde somos:
-   · Guinda #9F2241 — su color principal.
-   · Verde #10312B — su verde institucional, que en su propio sitio
-     casi no usan. Aquí carga la navegación y el pie.
-   · Dorado #B18C5B — el tercer color de su portada. Aclarado casi
-     hasta el blanco da el papel #FCFAF4: tibio pero discreto, ni el
-     crema rosado de lety2E ni el blanco puro del IEMS.
+   La primera versión usaba la paleta del IEMS/CDMX tal cual —guinda
+   #9F2241, verde #10312B, papel del dorado #B18C5B aclarado— y letras
+   Playfair Display en itálica. Se veía institucional y correcta, y ese
+   era el problema: el grupo construye aulas con agentes de IA, y el
+   sitio contestaba «trámite de gobierno» antes de que nadie leyera una
+   palabra. El ruido no venía del color solo; la Playfair, que cita al
+   siglo XVIII, pesaba tanto o más.
 
-   De lety2E — los huesos, no los gestos: se hereda la estructura
-   para que se note el parentesco, no los detalles reconocibles:
-   · Playfair Display en itálica para los títulos, DM Sans para el
-     texto, y las esquinas redondeadas.
-   · El turquesa como único acento: lo que impide que esto se lea
-     como un formulario de gobierno.
+   Lo que hay ahora:
+   · Bricolage Grotesque para sigla y títulos, DM Sans para el texto.
+     Contemporánea y con carácter, sin disfrazarse de startup.
+   · Encabezado y navegación fundidos en UN bloque oscuro (#101413),
+     con la sigla en turquesa. Ahí está la declaración.
+   · El cuerpo se queda claro: es donde de verdad se lee prosa larga,
+     y sus lectoras son docentes y estudiantes, no diseñadores.
+   · El turquesa dejó de ser adorno y es ahora el color de lo que se
+     puede tocar: enlaces, la pestaña abierta, el aula ya publicada.
+   · El guinda salió por completo. En su lugar, un ámbar que sirve
+     para una sola cosa: avisar «esto todavía está en obra».
 
-   El guinda del IEMS y el magenta de lety2E son el mismo tono en
-   distinta temperatura; por eso las dos marcas casan sin pelearse.
+   Lo único institucional que sobrevive es «IEMS», en verde claro, en
+   el encabezado y en el pie. Es la firma de afiliación: barata, y
+   suficiente para que se lea de qué casa somos ante Dirección
+   Académica y en las Jornadas.
    --------------------------------------------------------------- */
 
 :root {
   /* --- color --- */
-  --guinda:        #9F2241;
-  --guinda-hondo:  #7A1A32;
-  --guinda-tenue:  #F6E5E8;
-  --turquesa:      #00706A;   /* para texto: contrasta sobre el papel */
-  --turquesa-vivo: #00C9B8;   /* solo decorativo */
-  --turquesa-tenue:#DCF2EE;
-  --verde-medio:   #235B4E;   /* el verde CDMX a media altura: para marcar «IEMS» en texto.
-                                 El #10312B es tan oscuro que en letra chica se lee negro. */
+  --turquesa:      #00857A;   /* para texto sobre el papel claro: enlaces y negritas */
+  --turquesa-vivo: #00C9B8;   /* decorativo: filete, pestaña abierta, borde del aula viva */
+  --turquesa-tenue:#D6F2EC;
+  --marca:         #2FD9C2;   /* la sigla, sobre la banda oscura del encabezado */
+  --iems:          #7FCDB8;   /* «IEMS»: el guiño institucional, y va sobre fondo oscuro
+                                 tanto en el encabezado como en el pie */
 
-  --tinta:         #322E27;
-  --tinta-suave:   #5E594D;
-  --tinta-tenue:   #948C7B;
-  --papel:         #FCFAF4;   /* marfil claro: el dorado #B18C5B muy aclarado */
-  --papel-cabeza:  #EBE5D3;   /* el mismo dorado, dos puntos más cargado: es lo que hace
-                                 que el encabezado se lea como banda propia y no como
-                                 la misma hoja partida en dos por la barra verde. */
+  --ambar:         #8F4E22;   /* «en obra» — el único color cálido que queda */
+  --ambar-tenue:   #F7E7D8;
+
+  --tinta:         #14181A;
+  --tinta-suave:   #575E60;
+  --tinta-tenue:   #8A9194;
+  --papel:         #FBFBFA;
+  --papel-cabeza:  #101413;   /* la banda del encabezado, ahora oscura: junto con la
+                                 navegación forma un solo bloque, y ese bloque es la
+                                 declaración del sitio. */
   --papel-hondo:   #FFFFFF;
-  --oscuro:        #10312B;   /* el verde institucional: navegación y pie */
-  --linea:         #EDE7DA;
-  --linea-fuerte:  #DED6C4;
+  --oscuro:        #101413;   /* navegación y pie: el mismo negro-verdoso */
+  --linea:         #ECEEED;
+  --linea-fuerte:  #E2E4E3;
+
+  /* Texto sobre la banda oscura del encabezado. */
+  --cabeza-texto:  #F0F3F2;
+  --cabeza-tenue:  #9BA5A3;
+  --cabeza-raya:   #2C3634;
 
   /* --- forma --- */
   --ancho:  64rem;
@@ -66,29 +79,33 @@
   --r-lg:   18px;
 
   /* --- letra --- */
-  --display: "Playfair Display", Georgia, "Times New Roman", serif;
+  --display: "Bricolage Grotesque", system-ui, -apple-system, "Segoe UI", sans-serif;
   --texto:   "DM Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
 
+/* En oscuro el encabezado y el pie casi no cambian —ya eran oscuros—;
+   lo que se invierte es el cuerpo. El turquesa sube de tono para
+   despegarse del fondo. */
 @media (prefers-color-scheme: dark) {
   :root {
-    --guinda:        #E8879D;
-    --guinda-hondo:  #F2AEBD;
-    --guinda-tenue:  #38202A;
     --turquesa:      #4FD3C4;
     --turquesa-vivo: #00DEC8;
-    --turquesa-tenue:#123833;
-    --verde-medio:   #6DC9A4;
+    --turquesa-tenue:#10312C;
+    --marca:         #3FE0C8;
+    --iems:          #6DC9A4;
 
-    --tinta:         #EFEADF;
-    --tinta-suave:   #BAB2A2;
-    --tinta-tenue:   #877F6E;
-    --papel:         #16140F;
-    --papel-cabeza:  #272218;
-    --papel-hondo:   #1E1B15;
-    --oscuro:        #0A1F1B;
-    --linea:         #2F2B22;
-    --linea-fuerte:  #443F33;
+    --ambar:         #E0A868;
+    --ambar-tenue:   #3A2A18;
+
+    --tinta:         #E8EDEA;
+    --tinta-suave:   #9AA8A2;
+    --tinta-tenue:   #77857F;
+    --papel:         #0F1413;
+    --papel-cabeza:  #080D0C;
+    --papel-hondo:   #151C1A;
+    --oscuro:        #080D0C;
+    --linea:         #232C29;
+    --linea-fuerte:  #313B37;
   }
 }
 
@@ -107,12 +124,15 @@ body {
 
 .envoltura { max-width: var(--ancho); margin: 0 auto; padding: 0 1.5rem; }
 
-a { color: var(--guinda); text-decoration-thickness: 1px; text-underline-offset: 3px; }
-a:hover { color: var(--turquesa); }
+/* El turquesa es el color de lo que se puede tocar. Al pasar el mouse
+   se oscurece en vez de cambiar de color: el enlace no cambia de
+   naturaleza por estar debajo del cursor. */
+a { color: var(--turquesa); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:hover { color: var(--tinta); }
 
-/* --- Filete institucional, arriba de todo --------------------- */
+/* --- Filete, arriba de todo ----------------------------------- */
 
-.filete { height: 5px; background: var(--guinda); }
+.filete { height: 5px; background: var(--turquesa-vivo); }
 
 /* --- Portada --------------------------------------------------- */
 
@@ -135,17 +155,18 @@ a:hover { color: var(--turquesa); }
 .portada .raya {
   width: 2px;
   align-self: stretch;
-  background: var(--linea-fuerte);
+  background: var(--cabeza-raya);
 }
 
+/* La sigla en turquesa sobre la banda oscura: es lo único que brilla
+   en el encabezado, y por eso no necesita ser más grande. */
 .sigla {
   font-family: var(--display);
-  font-style: italic;
-  font-weight: 900;
+  font-weight: 800;
   font-size: clamp(2.4rem, 8vw, 3.5rem);
   line-height: 1;
-  letter-spacing: -0.015em;
-  color: var(--guinda);
+  letter-spacing: -0.035em;
+  color: var(--marca);
   margin: 0;
 }
 
@@ -156,23 +177,25 @@ a:hover { color: var(--turquesa); }
   line-height: 1.3;
   margin: 0 0 0.3rem;
   max-width: 22rem;
+  color: var(--cabeza-texto);
 }
 
-.lema em { color: var(--guinda); font-style: italic; font-weight: 900; }
+.lema em { color: var(--marca); font-style: normal; font-weight: 800; }
 
-/* Va en el gris medio y no en el más claro: sobre la banda del
-   encabezado, que es más oscura que el cuerpo, el gris tenue se queda
-   en 2.6:1 — ilegible. Con este llega a 5.5:1. */
+/* Sobre la banda oscura del encabezado no sirve ninguno de los grises
+   del cuerpo: son tinta aclarada y ahí se hunden. Este es el gris
+   propio de la banda. */
 .institucional {
   font-size: 0.8125rem;
-  color: var(--tinta-suave);
+  color: var(--cabeza-tenue);
   margin: 0;
 }
 
-/* «IEMS» en verde institucional: es lo único de esa línea que vale la
-   pena resaltar, y el verde lo separa sin necesidad de más puntuación. */
+/* «IEMS» es lo único institucional que sobrevivió al cambio de paleta:
+   la firma de afiliación. Va en verde claro porque ahora sus dos casas
+   —el encabezado y el pie— son oscuras. */
 .iems {
-  color: var(--verde-medio);
+  color: var(--iems);
   font-weight: 700;
   letter-spacing: 0.03em;
 }
@@ -192,7 +215,7 @@ a:hover { color: var(--turquesa); }
   max-width: 36rem;
 }
 
-.promesa em { color: var(--turquesa); font-style: italic; font-weight: 700; }
+.promesa em { color: var(--turquesa); font-style: normal; font-weight: 700; }
 
 /* --- Navegación ------------------------------------------------ */
 
@@ -252,13 +275,16 @@ a:hover { color: var(--turquesa); }
 
 html:not(.js) .panel + .panel { border-top: 1px solid var(--linea); }
 
+/* Los títulos ya no llevan color: con la Bricolage en peso 800 y el
+   tracking cerrado, el tamaño y el peso bastan para marcar dónde
+   empieza cada cosa. El color se reserva para lo que se toca. */
 h2 {
   font-family: var(--display);
-  font-style: italic;
-  font-weight: 900;
+  font-weight: 800;
   font-size: clamp(1.8rem, 5vw, 2.4rem);
   line-height: 1.15;
-  color: var(--guinda);
+  letter-spacing: -0.025em;
+  color: var(--tinta);
   margin: 0 0 0.4rem;
 }
 
@@ -268,11 +294,18 @@ h2 {
 .prosa p { margin: 0 0 1rem; }
 .prosa p:last-child { margin-bottom: 0; }
 
+/* La negrita del cuerpo va en turquesa, igual que los enlaces. No se
+   confunden porque el enlace además va subrayado.
+   El pie tiene su propia regla más abajo: sobre el fondo oscuro este
+   turquesa se apaga. */
+.prosa strong { color: var(--turquesa); }
+
 .destacado {
   border-left: 4px solid var(--turquesa-vivo);
   padding: 0.25rem 0 0.25rem 1.35rem;
   margin: 1.25rem 0;
   font-family: var(--display);
+  font-weight: 500;
   font-size: 1.25rem;
   line-height: 1.45;
   max-width: 34rem;
@@ -299,18 +332,21 @@ h2 {
 
 /* El aula en obra se distingue por el borde punteado: sin adornos,
    y el punteado ya significa "todavía no está". La tarjeta publicada
-   lleva borde continuo. */
+   lleva borde continuo, y además en turquesa: las dos señales apuntan
+   al mismo lado, así el directorio se lee de un vistazo. */
 .aula:not(.aula--publicada) {
   border-style: dashed;
   background: transparent;
 }
 
+.aula--publicada { border-color: var(--turquesa-vivo); }
+
 .aula h3 {
   font-family: var(--display);
-  font-style: italic;
-  font-weight: 900;
+  font-weight: 700;
   font-size: 1.45rem;
-  color: var(--guinda);
+  letter-spacing: -0.02em;
+  color: var(--tinta);
   margin: 0;
   line-height: 1.2;
 }
@@ -332,7 +368,7 @@ h2 {
 }
 
 .etiqueta--publicada   { background: var(--turquesa-tenue); color: var(--turquesa); }
-.etiqueta--construccion{ background: var(--guinda-tenue);   color: var(--guinda); }
+.etiqueta--construccion{ background: var(--ambar-tenue);    color: var(--ambar); }
 
 /* --- Recursos -------------------------------------------------- */
 
@@ -349,8 +385,8 @@ h2 {
 
 .recursos .titulo {
   font-family: var(--display);
-  font-style: italic;
-  font-weight: 900;
+  font-weight: 700;
+  letter-spacing: -0.02em;
   font-size: 1.2rem;
 }
 
@@ -381,11 +417,10 @@ h2 {
   stroke-width: 1;
 }
 
-.esquema .paso circle { fill: var(--guinda); }
+.esquema .paso circle { fill: var(--turquesa); }
 
-/* Aquí sí van en DM Sans y no en Playfair: los números itálicos de
-   Playfair son de altura variable y en un círculo chico el 4 se
-   confunde con el 1. En un esquema la cifra tiene que leerse sola. */
+/* Aquí sí van en DM Sans y no en la display: en un círculo chico la
+   cifra tiene que leerse sola, sin tracking cerrado ni carácter. */
 .esquema .num {
   fill: var(--papel);
   font-family: var(--texto);
@@ -445,9 +480,8 @@ footer {
 footer p { margin: 0; }
 footer strong { color: #E4EEE8; }
 
-/* Sobre el pie verde el verde no se ve; ahí «IEMS» se marca en claro
-   para que conserve el mismo rango que arriba. */
-footer .iems { color: #8FD8BC; }
+/* Ya no hace falta un «IEMS» distinto para el pie: desde que el
+   encabezado también es oscuro, --iems sirve en los dos lugares. */
 
 /* --- Marca de edición (se borra al llenar los datos) ------------ */
 
@@ -504,31 +538,40 @@ footer .iems { color: #8FD8BC; }
      ============================================================= -->
 <section id="que-es" class="panel" role="tabpanel" tabindex="-1">
   <div class="envoltura">
-    <p class="promesa">
-      Cada quien construye <em>su aula propia</em>: un sitio con sus explicaciones,
-      sus ejercicios y sus interactivos, hecho por quien da la clase.
-    </p>
-
     <h2>Qué es GICAIA</h2>
-    <p class="subtitulo">La idea. Un grupo de trabajo, no un curso.</p>
+    <p class="subtitulo">Un grupo de trabajo, no un curso.</p>
 
     <div class="prosa">
       <p>
-        Somos docentes de distintas asignaturas del IEMS que estamos construyendo, cada quien,
-        el sitio web de su materia: páginas con explicaciones, actividades e interactivos que
-        los estudiantes usan por su cuenta, antes y después de la clase.
+        Somos docentes del IEMS que estamos construyendo, cada quien, el sitio web de su
+        materia: páginas con explicaciones, actividades e interactivos que los estudiantes
+        usan por su cuenta, antes y después de la clase. Hoy el grupo lo integramos docentes
+        de matemáticas, aunque no se limita a esa academia.
       </p>
 
+      <!-- Va DESPUÉS del párrafo y no antes: como entrada, «su aula
+           propia» llegaba sin que nadie supiera todavía qué es un aula
+           aquí. Aquí cierra la idea en una frase. -->
+      <p class="promesa">
+        Cada quien construye <em>su aula propia</em>: un sitio con sus explicaciones,
+        sus ejercicios y sus interactivos, diseñado por el docente que imparte la asignatura.
+      </p>
+
+      <!-- La versión anterior decía «quitar al profesor del pizarrón».
+           Se cambió porque a un lector docente le activa el miedo a ser
+           sustituido, y con ese miedo encendido ya no lee el resto. La
+           primera frase de aquí lo contesta antes de que aparezca. -->
       <p class="destacado">
-        No se trata de mudar la clase de lugar. Se trata de quitar al profesor del pizarrón
-        y poner al frente al estudiante investigando y explorando.
+        Lo que cambia no es quién enseña, sino cuándo. El estudiante llega a clase habiendo
+        trabajado ya el material, y la hora se ocupa en atender sus dificultades.
       </p>
 
+      <!-- La invitación vive aquí y no en «Las aulas»: quien acaba de
+           entender qué es esto es quien puede querer entrar. -->
       <p>
-        Eso es lo que aquí quiere decir <strong>aula invertida</strong>, y conviene decirlo
-        claro porque la palabra se ha vuelto sinónimo de grabar videos. Los videos caben —
-        varias los usamos—, pero no son el criterio. El criterio es quién hace el trabajo
-        mental. Una página que repite la misma clase, solo que escrita, no invierte nada.
+        El grupo es pequeño a propósito. Si eres docente del IEMS y quieres saber más, o
+        construir tu aula, escribe a
+        <a href="mailto:leticia.rodriguez.sm@iems.edu.mx">leticia.rodriguez.sm@iems.edu.mx</a>.
       </p>
     </div>
   </div>
@@ -539,54 +582,37 @@ footer .iems { color: #8FD8BC; }
      Aquí viven juntas las personas y sus aulas: eran dos pestañas
      ("Quiénes" y "Las aulas") que decían lo mismo a medias.
 
+     El estado no se dice con palabras: el aula publicada lleva borde
+     continuo y su enlace; la que no, borde punteado y nada más. Así
+     nadie queda anunciado como el que no ha entregado.
+
      Para agregar a alguien: copiar un <li> y cambiar los datos.
      Cuando publique, cambiar class="aula" por
-     class="aula aula--publicada", la etiqueta por la de publicada,
-     y agregar el <p class="enlace">.
+     class="aula aula--publicada" y agregar el <p class="enlace">.
      ============================================================= -->
 <section id="aulas" class="panel" role="tabpanel" tabindex="-1">
   <div class="envoltura">
     <h2>Las aulas</h2>
-    <p class="subtitulo">
-      Quiénes somos y qué ha construido cada quien. Somos de asignaturas distintas y el grupo
-      se mantiene pequeño a propósito: seis personas como máximo.
-    </p>
 
     <ul class="aulas">
 
       <li class="aula aula--publicada">
-        <span class="etiqueta etiqueta--publicada">Publicada</span>
         <h3>Lety</h3>
-        <p class="materia">Matemáticas · coordina el grupo</p>
-        <p class="descripcion">
-          Materiales, apuntes e interactivos de matemáticas para bachillerato.
-        </p>
+        <p class="materia">Matemáticas</p>
         <p class="enlace"><a href="https://lety2e.com/math">lety2e.com/math →</a></p>
       </li>
 
       <li class="aula">
-        <span class="etiqueta etiqueta--construccion">En construcción</span>
         <h3>Antonia</h3>
         <p class="materia"><span class="porllenar">asignatura</span></p>
-        <p class="descripcion">Su aula está en obra. Se enlaza aquí en cuanto publique.</p>
       </li>
 
       <li class="aula">
-        <span class="etiqueta etiqueta--construccion">En construcción</span>
         <h3>Carmen</h3>
         <p class="materia"><span class="porllenar">asignatura</span></p>
-        <p class="descripcion">Su aula está en obra. Se enlaza aquí en cuanto publique.</p>
       </li>
 
     </ul>
-
-    <div class="prosa" style="margin-top:1.6rem">
-      <p>
-        <strong>Si te interesa entrar:</strong> el grupo es pequeño y se abre por invitación,
-        pero si eres docente del IEMS y quieres construir tu aula, escribe a
-        <a href="mailto:leticia.rodriguez.sm@iems.edu.mx">leticia.rodriguez.sm@iems.edu.mx</a>.
-      </p>
-    </div>
   </div>
 </section>
 
@@ -703,23 +729,25 @@ footer .iems { color: #8FD8BC; }
 </section>
 
 <!-- =============================================================
-     5. RECURSOS — se enlazan, vengan de donde vengan.
+     4. RECURSOS — se enlazan, vengan de donde vengan.
      Este sitio reúne y enlaza; no es donde se produce el material.
+     No hace falta decir de quién es cada recurso en la introducción:
+     la dirección ya lo dice sola.
      ============================================================= -->
 <section id="recursos" class="panel" role="tabpanel" tabindex="-1">
   <div class="envoltura">
     <h2>Recursos</h2>
     <p class="subtitulo">
-      Guías, plantillas y flujos de trabajo. Los reunimos aquí; viven donde los hizo quien los hizo.
+      Guías, plantillas y flujos de trabajo.
     </p>
 
     <ul class="recursos">
       <li>
-        <span class="titulo"><a href="https://lety2e.com/docencia">Aula propia — la guía para arrancar</a></span>
+        <span class="titulo"><a href="https://lety2e.com/docencia">Primeros pasos</a></span>
         <span class="de">de Lety · lety2e.com/docencia</span>
         <p class="nota">
-          Cómo montar tu aula desde cero: la carpeta, el agente, la publicación. Es el camino
-          completo, contado por alguien que ya lo recorrió.
+          Por dónde empezar cuando aún no hay nada: la carpeta, el agente, la primera
+          página publicada.
           <span class="porllenar">En escritura — revisar el enlace antes de publicar.</span>
         </p>
       </li>
