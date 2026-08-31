@@ -393,7 +393,7 @@ h2 {
 .recursos .de   { font-size: 0.875rem; color: var(--tinta-tenue); }
 .recursos .nota { flex-basis: 100%; font-size: 0.9375rem; color: var(--tinta-suave); margin: 0.35rem 0 0; }
 
-/* --- El ciclo, en esquema --------------------------------------- */
+/* --- El esquema de producción ----------------------------------- */
 
 /* En pantalla angosta el esquema no se encoge hasta volverse ilegible:
    se desplaza de lado dentro de su propia caja. */
@@ -411,49 +411,40 @@ h2 {
   font-family: var(--texto);
 }
 
-.esquema .paso rect {
+/* Las dos puntas del flujo —lo que entra y lo que sale— van rellenas
+   en turquesa porque son de la docente. El agente va en caja punteada
+   y sin relleno: es el paso de en medio, no un protagonista. */
+.esquema .caja-tuya rect {
+  fill: var(--turquesa-tenue);
+  stroke: var(--turquesa-vivo);
+  stroke-width: 1.5;
+}
+
+.esquema .caja-agente rect {
   fill: var(--papel-hondo);
-  stroke: var(--linea-fuerte);
-  stroke-width: 1;
-}
-
-.esquema .paso circle { fill: var(--turquesa); }
-
-/* Aquí sí van en DM Sans y no en la display: en un círculo chico la
-   cifra tiene que leerse sola, sin tracking cerrado ni carácter. */
-.esquema .num {
-  fill: var(--papel);
-  font-family: var(--texto);
-  font-weight: 700;
-  font-size: 15px;
-  text-anchor: middle;
-}
-
-.esquema .rot {
-  fill: var(--tinta);
-  font-size: 16px;
-  text-anchor: middle;
-}
-
-.esquema .avance path {
-  fill: none;
   stroke: var(--tinta-tenue);
-  stroke-width: 2.5;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+  stroke-width: 1.5;
+  stroke-dasharray: 6 4;
 }
 
-.esquema .vuelta {
+.esquema .tit {
+  fill: var(--tinta);
+  font-size: 17px;
+  font-weight: 700;
+  text-anchor: middle;
+}
+
+.esquema .sub {
+  fill: var(--tinta-suave);
+  font-size: 13.5px;
+  text-anchor: middle;
+}
+
+.esquema .flecha {
   fill: none;
   stroke: var(--turquesa);
-  stroke-width: 2;
-}
-
-.esquema .vuelta-rot {
-  fill: var(--turquesa);
-  font-size: 15px;
-  font-weight: 500;
-  text-anchor: middle;
+  stroke-width: 2.5;
+  stroke-linecap: round;
 }
 
 /* --- La aclaración, al pie de «Cómo trabajamos» ----------------- */
@@ -622,21 +613,23 @@ footer strong { color: #E4EEE8; }
 <section id="como-trabajamos" class="panel" role="tabpanel" tabindex="-1">
   <div class="envoltura">
     <h2>Cómo trabajamos</h2>
-    <p class="subtitulo">El funcionamiento. Una sesión al mes; la producción ocurre entre sesión y sesión.</p>
+    <p class="subtitulo">El funcionamiento. Una sesión al mes, y dos puertas abiertas entre sesión y sesión.</p>
 
     <div class="prosa">
       <p>
         La sesión mensual no es una clase: es donde cada quien <strong>muestra</strong> lo que
-        construyó. Lo que se aprende, se aprende haciendo, en casa, con el agente enfrente.
-        Entre sesiones hay un canal permanente para no quedarse atorado tres semanas.
+        construyó. Se comparten flujos de trabajo con agentes, artefactos HTML, y las ideas de
+        implementación didáctica que nos estén funcionando.
       </p>
     </div>
 
-    <!-- El ciclo, en esquema. Para cambiar un paso se edita su <tspan>;
-         las cajas son cinco y están espaciadas cada 182 unidades. -->
+    <!-- El esquema de producción. Dice en imagen lo mismo que la
+         aclaración del final dice en palabras: las dos puntas son de la
+         docente y el agente es solo el paso de en medio.
+         Para cambiar un texto se edita su <text>. -->
     <figure class="esquema">
-      <svg viewBox="0 0 900 205" role="img"
-           aria-label="El ciclo de trabajo, en cinco pasos que se repiten: un tema que se atora, un interactivo que lo desatore, publicado en tu sitio, usado en clase, contado en la sesión.">
+      <svg viewBox="0 0 900 250" role="img"
+           aria-label="Tus materiales y tu idea pedagógica entran; el agente implementa; sale una página web que es parte de tu aula invertida.">
 
         <defs>
           <marker id="punta" viewBox="0 0 10 10" refX="9" refY="5"
@@ -645,70 +638,40 @@ footer strong { color: #E4EEE8; }
           </marker>
         </defs>
 
-        <g class="paso">
-          <rect x="8"   y="34" width="152" height="78" rx="14"/>
-          <circle cx="84"  cy="34" r="15"/>
-          <text class="num" x="84"  y="39">1</text>
-          <text class="rot" x="84"  y="72">Un tema</text>
-          <text class="rot" x="84"  y="94">que se atora</text>
+        <g class="caja-tuya">
+          <rect x="8" y="24"  width="230" height="80" rx="14"/>
+          <rect x="8" y="146" width="230" height="80" rx="14"/>
         </g>
+        <text class="tit" x="123" y="58">Tus materiales</text>
+        <text class="sub" x="123" y="80">los que ya usas en clase</text>
+        <text class="tit" x="123" y="180">Tu idea pedagógica</text>
+        <text class="sub" x="123" y="202">la secuencia, el criterio</text>
 
-        <g class="paso">
-          <rect x="190" y="34" width="152" height="78" rx="14"/>
-          <circle cx="266" cy="34" r="15"/>
-          <text class="num" x="266" y="39">2</text>
-          <text class="rot" x="266" y="72">Un interactivo</text>
-          <text class="rot" x="266" y="94">que lo desatore</text>
-        </g>
+        <path class="flecha" d="M 246 64  C 300 64,  300 105, 348 113" marker-end="url(#punta)"/>
+        <path class="flecha" d="M 246 186 C 300 186, 300 145, 348 137" marker-end="url(#punta)"/>
 
-        <g class="paso">
-          <rect x="372" y="34" width="152" height="78" rx="14"/>
-          <circle cx="448" cy="34" r="15"/>
-          <text class="num" x="448" y="39">3</text>
-          <text class="rot" x="448" y="72">Publicado</text>
-          <text class="rot" x="448" y="94">en tu sitio</text>
-        </g>
+        <g class="caja-agente"><rect x="356" y="87" width="180" height="76" rx="14"/></g>
+        <text class="tit" x="446" y="120">El agente</text>
+        <text class="sub" x="446" y="142">implementa</text>
 
-        <g class="paso">
-          <rect x="554" y="34" width="152" height="78" rx="14"/>
-          <circle cx="630" cy="34" r="15"/>
-          <text class="num" x="630" y="39">4</text>
-          <text class="rot" x="630" y="72">Usado</text>
-          <text class="rot" x="630" y="94">en clase</text>
-        </g>
+        <path class="flecha" d="M 544 125 L 618 125" marker-end="url(#punta)"/>
 
-        <g class="paso">
-          <rect x="736" y="34" width="152" height="78" rx="14"/>
-          <circle cx="812" cy="34" r="15"/>
-          <text class="num" x="812" y="39">5</text>
-          <text class="rot" x="812" y="72">Contado</text>
-          <text class="rot" x="812" y="94">en la sesión</text>
-        </g>
-
-        <!-- los avances de un paso al siguiente -->
-        <g class="avance">
-          <path d="M 170 66 L 180 73 L 170 80"/>
-          <path d="M 352 66 L 362 73 L 352 80"/>
-          <path d="M 534 66 L 544 73 L 534 80"/>
-          <path d="M 716 66 L 726 73 L 716 80"/>
-        </g>
-
-        <!-- la vuelta: lo que lo convierte en ciclo y no en lista -->
-        <path class="vuelta" d="M 812 112 L 812 152 Q 812 164 800 164 L 96 164 Q 84 164 84 152 L 84 122"
-              marker-end="url(#punta)"/>
-        <text class="vuelta-rot" x="448" y="192">y vuelta a empezar, cada mes</text>
+        <g class="caja-tuya"><rect x="628" y="79" width="264" height="92" rx="14"/></g>
+        <text class="tit" x="760" y="116">Una página web</text>
+        <text class="sub" x="760" y="138">parte de tu aula invertida</text>
       </svg>
     </figure>
 
     <div class="prosa">
       <p>
-        La meta de este semestre es tener <strong>una unidad completa</strong> de tu curso
-        funcionando así. Lo que venga después se decide cuando lleguemos.
+        Eso se construye en casa, con el agente enfrente. Y entre sesiones hay dos puertas
+        abiertas: un <strong>grupo de WhatsApp</strong> para las dudas que salgan sobre la marcha,
+        y un rato fijo en el plantel — <strong>los jueves de 8:00 a 9:30, en Xochimilco</strong>.
       </p>
 
       <p>
-        Llegar a una sesión sin pieza es normal y no pasa nada: hay meses en que la escuela no
-        deja. Lo que sí importa es decirlo, en vez de dejar de venir.
+        La meta de este semestre es tener <strong>tu sitio corriendo</strong>, con al menos un tema
+        al mes.
       </p>
     </div>
 
