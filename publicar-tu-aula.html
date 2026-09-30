@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Publicar tu aula — GICAIA</title>
+<meta name="description" content="Guía del grupo GICAIA, parte 2: publicar tu aula en internet con GitHub Desktop, en Mac o en Windows.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,700;12..96,800&display=swap" rel="stylesheet">
+
+<style>
+/* Misma paleta y letra que index.html (ver la explicación de la marca allá).
+   Página suelta y ligera: una guía que se lee de arriba abajo. */
+:root {
+  --turquesa: #00857A; --turquesa-vivo: #00C9B8; --turquesa-tenue: #D6F2EC;
+  --marca: #2FD9C2; --iems: #7FCDB8;
+  --ambar: #8F4E22; --ambar-tenue: #F7E7D8;
+  --tinta: #14181A; --tinta-suave: #575E60; --tinta-tenue: #8A9194;
+  --papel: #FBFBFA; --papel-hondo: #FFFFFF; --oscuro: #101413;
+  --linea: #ECEEED; --linea-fuerte: #E2E4E3;
+  --cabeza-texto: #F0F3F2; --cabeza-tenue: #9BA5A3;
+  --ancho: 44rem; --r-sm: 6px; --r-md: 12px;
+  --display: "Bricolage Grotesque", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --texto: "DM Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --turquesa: #4FD3C4; --turquesa-vivo: #00DEC8; --turquesa-tenue: #10312C;
+    --marca: #3FE0C8; --iems: #6DC9A4;
+    --ambar: #E0A868; --ambar-tenue: #3A2A18;
+    --tinta: #E8EDEA; --tinta-suave: #9AA8A2; --tinta-tenue: #77857F;
+    --papel: #0F1413; --papel-hondo: #151C1A; --oscuro: #080D0C;
+    --linea: #232C29; --linea-fuerte: #313B37;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--papel); color: var(--tinta);
+  font-family: var(--texto); font-size: 1.0625rem; line-height: 1.65;
+}
+.envoltura { max-width: var(--ancho); margin: 0 auto; padding: 0 1rem; }
+a { color: var(--turquesa); }
+strong { color: var(--tinta); }
+
+header { background: var(--oscuro); color: var(--cabeza-texto); padding: 2.5rem 0 2.25rem; }
+header .volver { color: var(--cabeza-tenue); font-size: 0.9rem; text-decoration: none; }
+header .volver:hover { color: var(--marca); }
+header .volver b { color: var(--marca); font-family: var(--display); font-weight: 800; }
+h1 {
+  font-family: var(--display); font-weight: 800; letter-spacing: -0.03em;
+  font-size: clamp(2rem, 6vw, 2.9rem); line-height: 1.05; margin: 1.25rem 0 0.75rem;
+}
+header p { color: var(--cabeza-tenue); margin: 0; max-width: 36rem; }
+header p a { color: var(--marca); }
+
+main { padding: 2.5rem 0 3rem; }
+h2 {
+  font-family: var(--display); font-weight: 700; letter-spacing: -0.02em;
+  font-size: 1.5rem; line-height: 1.2; margin: 0 0 0.6rem;
+}
+.paso { border-top: 1px solid var(--linea-fuerte); padding: 1.75rem 0 1.25rem; }
+.paso .num {
+  font-family: var(--display); font-weight: 800; color: var(--turquesa-vivo);
+  font-size: 0.95rem; letter-spacing: 0.04em; text-transform: uppercase;
+}
+.paso ol, .paso ul { padding-left: 1.3rem; }
+.paso li { margin: 0.3rem 0; }
+code {
+  font-size: 0.92em; background: var(--turquesa-tenue); color: var(--tinta);
+  padding: 0.05em 0.35em; border-radius: 4px; overflow-wrap: anywhere;
+}
+.boton {
+  font-weight: 700; background: var(--papel-hondo); border: 1px solid var(--linea-fuerte);
+  border-radius: 4px; padding: 0.05em 0.4em; white-space: nowrap;
+}
+.pedido {
+  background: var(--papel-hondo); border: 1px solid var(--linea-fuerte);
+  border-left: 4px solid var(--turquesa-vivo); border-radius: var(--r-sm);
+  padding: 0.9rem 1.1rem; margin: 1rem 0; font-style: italic; color: var(--tinta-suave);
+}
+.pedido::before {
+  content: "Pídeselo así"; display: block; font-style: normal; font-weight: 700;
+  font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em;
+  color: var(--turquesa); margin-bottom: 0.3rem;
+}
+.aviso {
+  background: var(--ambar-tenue); border-radius: var(--r-sm);
+  padding: 0.9rem 1.1rem; margin: 1rem 0; font-size: 0.97rem;
+}
+.aviso b:first-child { color: var(--ambar); }
+.consejos { list-style: none; padding: 0; margin: 0; }
+.consejos li { padding: 0.6rem 0; border-bottom: 1px solid var(--linea); }
+.consejos li:last-child { border-bottom: 0; }
+
+footer { background: var(--oscuro); color: var(--cabeza-tenue); padding: 1.5rem 0; font-size: 0.9rem; }
+footer strong { color: var(--cabeza-texto); }
+footer .iems { color: var(--iems); font-weight: 700; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="envoltura">
+    <a class="volver" href="./#recursos">← <b>GICAIA</b> · Recursos</a>
+    <h1>Publicar tu aula</h1>
+    <p>
+      Parte 2 de 2. Tu aula ya existe en tu computadora; ahora la subimos a internet con GitHub.
+      Sirve igual en Mac que en Windows. ¿Aún no la armas? Empieza por la
+      <a href="abrir-tu-aula.html">parte 1</a>.
+    </p>
+  </div>
+</header>
+
+<main>
+  <div class="envoltura">
+
+    <section class="paso">
+      <p>
+        <strong>La idea:</strong> se prepara una sola vez, y de ahí en adelante tú cambias lo que quieras
+        con tu agente y cuando esté listo le dices <strong>«súbelo»</strong>. Él se encarga de subirlo a internet.
+        La preparación toma una sesión; la haces con tu agente, que te va guiando.
+      </p>
+    </section>
+
+    <section class="paso">
+      <div class="num">Paso 1</div>
+      <h2>La cuenta de GitHub</h2>
+      <p>
+        ¿Ya la creaste de tarea? Pasa al paso 2.
+        Este paso es <strong>tuyo, no del agente</strong>: la cuenta lleva tu correo y tu contraseña.
+        Entra a <a href="https://github.com">github.com</a> y crea una cuenta. Piensa bien el
+        <strong>nombre de usuario</strong>: va a ser la dirección de tu aula.
+        Si te llamas <code>MateConAna</code>, tu página será <code>mateconana.github.io</code>.
+      </p>
+      <p>Si el nombre que querías ya está ocupado, pruébale una variante; es normal.</p>
+      <div class="aviso">
+        <b>No crees el repositorio a mano en github.com.</b> Lo crea tu agente en el paso 4.
+      </div>
+    </section>
+
+    <section class="paso">
+      <div class="num">Paso 2</div>
+      <h2>Las dos herramientas del agente</h2>
+      <p>
+        Para subir tu aula, el agente usa dos programas: <strong>Git</strong> (guarda las versiones)
+        y <strong>GitHub CLI</strong> (habla con tu cuenta). Pídele que revise si ya los tienes
+        y que te diga cómo instalar lo que falte.
+      </p>
+      <div class="pedido">
+        Quiero que tú te encargues de subir mi aula a GitHub. Revisa si en esta computadora tengo
+        Git y GitHub CLI (gh). Si falta alguno, guíame paso a paso para instalarlo; yo le doy clic a lo que haga falta.
+      </div>
+      <ul>
+        <li><em>En Windows:</em> se instalan con sus instaladores normales
+          (<a href="https://git-scm.com">git-scm.com</a> y <a href="https://cli.github.com">cli.github.com</a>),
+          dándole <em>Siguiente</em> a todo.</li>
+        <li><em>En Mac:</em> Git viene con las «herramientas de desarrollador» de Apple; el agente te
+          dirá cómo pedirlas. GitHub CLI se baja de <a href="https://cli.github.com">cli.github.com</a>
+          (el instalador <code>.pkg</code>).</li>
+      </ul>
+      <div class="aviso">
+        <b>En Mac: si la instalación de las herramientas de Apple falla,</b> no es tu computadora: a veces
+        el servidor de Apple está caído. Inténtalo otro día, o usa el plan B de abajo mientras tanto.
+      </div>
+    </section>
+
+    <section class="paso">
+      <div class="num">Paso 3</div>
+      <h2>Conecta a tu agente con tu cuenta (una sola vez)</h2>
+      <p>
+        El agente te va a dar un <strong>código de 8 letras</strong> y abrirá tu navegador en GitHub.
+        Tú entras con tu cuenta, pegas el código y autorizas. Tu contraseña la escribes tú en GitHub,
+        nunca en el chat.
+      </p>
+      <div class="pedido">
+        Conéctate a mi cuenta de GitHub con gh auth login, por el navegador, y deja Git configurado
+        para usar esa sesión.
+      </div>
+    </section>
+
+    <section class="paso">
+      <div class="num">Paso 4</div>
+      <h2>Tu agente publica tu aula</h2>
+      <div class="pedido">
+        Crea el repositorio público tuusuario.github.io con lo que hay en esta carpeta y súbelo,
+        para que mi aula quede en https://tuusuario.github.io
+      </div>
+      <p>
+        En unos minutos tu aula está en <code>https://tuusuario.github.io</code> (tu usuario, en minúsculas).
+        Tiene que ser <strong>público</strong> para que la página sea gratis.
+      </p>
+      <div class="aviso">
+        <b>En Mac: si sale un aviso de que no se puede acceder a la carpeta del Escritorio,</b>
+        dale <em>Permitir</em>. Si ya le diste «No permitir», se arregla en Configuración del Sistema →
+        Privacidad y seguridad → Archivos y carpetas.
+      </div>
+    </section>
+
+    <section class="paso">
+      <div class="num">Paso 5</div>
+      <h2>Que se quede como regla</h2>
+      <p>Para que tu agente lo recuerde siempre, pídele que lo anote en su manual:</p>
+      <div class="pedido">
+        Anota en el CLAUDE.md: cuando yo diga «súbelo», guardas los cambios con una descripción
+        corta en español, los subes a GitHub y me confirmas cuando la página ya esté actualizada.
+        Nunca subas nada sin que yo lo pida.
+      </div>
+    </section>
+
+    <section class="paso">
+      <div class="num">De aquí en adelante</div>
+      <h2>Cambias, revisas, «súbelo»</h2>
+      <ol>
+        <li>Pídele al agente el cambio que quieras.</li>
+        <li>Revísalo en tu computadora (doble clic en <code>index.html</code>).</li>
+        <li>Cuando te guste, dile: <strong>«súbelo»</strong>.</li>
+        <li>Espera de 1 a 3 minutos y recarga tu página.</li>
+      </ol>
+      <p>Cuando tu aula esté en línea, avísale al grupo: entra al directorio de GICAIA.</p>
+    </section>
+
+    <section class="paso">
+      <h2>Plan B: GitHub Desktop</h2>
+      <p>
+        Si en tu computadora no se pudo instalar Git o GitHub CLI, puedes subir tu aula tú misma con
+        <strong>GitHub Desktop</strong> (<a href="https://desktop.github.com">desktop.github.com</a>),
+        un programa con botones que no necesita nada más.
+      </p>
+      <ol>
+        <li><em>En Mac:</em> mueve la app a <strong>Aplicaciones</strong> antes de abrirla.</li>
+        <li>Inicia sesión, luego <span class="boton">File</span> → <span class="boton">Add Local Repository…</span>
+          → tu carpeta → <span class="boton">Create Repository</span>.</li>
+        <li><span class="boton">Publish repository</span> con el nombre <code>tuusuario.github.io</code> y
+          <strong>desmarcando</strong> <em>Keep this code private</em>.</li>
+        <li>Para cada cambio: escribe qué cambió en <strong>Summary</strong>,
+          <span class="boton">Commit to main</span> y luego <span class="boton">Push origin</span>.</li>
+      </ol>
+      <p>Cuando ya funcionen Git y GitHub CLI, tu agente puede tomar la estafeta desde el paso 3.</p>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  <div class="envoltura">
+    <p><strong>GICAIA</strong> · <span class="iems">IEMS</span> Ciudad de México ·
+      Guía del grupo, armada con lo que aprendimos al abrir nuestras aulas.</p>
+  </div>
+</footer>
+
+</body>
+</html>
